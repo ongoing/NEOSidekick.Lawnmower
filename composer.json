@@ -1,0 +1,18 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "neosidekick/contentrepositorywebhooks",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "NEOSidekick\\ContentRepositoryWebhooks\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "NEOSidekick.ContentRepositoryWebhooks"
+        }
+    }
+}
