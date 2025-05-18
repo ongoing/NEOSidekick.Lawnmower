@@ -1,0 +1,7 @@
+-
+  name:  'Backend Service'
+  uriPattern: 'neosidekick/n8n/{@controller}/{@action}'
+  defaults:
+    '@package':    'NEOSidekick.ContentRepositoryWebhooks'
+    '@format':     'json'
+  httpMethods: ['GET', 'POST']
