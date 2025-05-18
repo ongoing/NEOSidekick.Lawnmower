@@ -1,3 +1,19 @@
 NEOSidekick:
   ContentRepositoryWebhooks:
     webhookUrl: ''
+
+Neos:
+  Flow:
+    mvc:
+      routes:
+        'NEOSidekick.ContentRepositoryWebhooks': true
+    security:
+      authentication:
+        providers:
+          'NEOSidekick.ContentRepositoryWebhooks:Token':
+            provider: Flownative\TokenAuthentication\Security\HashTokenProvider
+            requestPatterns:
+              'NEOSidekick.ContentRepositoryWebhooks:BackendControllers':
+                pattern: ControllerObjectName
+                patternOptions:
+                  controllerObjectNamePattern: 'NEOSidekick\ContentRepositoryWebhooks\Controller\.*'

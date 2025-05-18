@@ -18,6 +18,7 @@ class Package extends \Neos\Flow\Package
         $dispatcher->connect(Node::class, 'nodeRemoved', SignalCollectionService::class, 'registerSignal');
         $dispatcher->connect(PublishingService::class, 'nodePublished', SignalCollectionService::class, 'registerSignal');
         $dispatcher->connect(PublishingService::class, 'nodeDiscarded', SignalCollectionService::class, 'registerSignal');
+        $dispatcher->connect(Workspace::class, 'beforeNodePublishing', SignalCollectionService::class, 'registerSignal');
         $dispatcher->connect(Workspace::class, 'afterNodePublishing', SignalCollectionService::class, 'registerSignal');
     }
 }
