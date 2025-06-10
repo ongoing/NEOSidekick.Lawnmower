@@ -1,6 +1,6 @@
 NEOSidekick:
   ContentRepositoryWebhooks:
-    webhookUrl: ''
+    webhookUrl: 'https://neosidekick.app.n8n.cloud/webhook-test/neos-before-node-publishing'
 
 Neos:
   Flow:

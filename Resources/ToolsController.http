@@ -1,0 +1,38 @@
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+
+{
+  "name": "Ping",
+  "arguments": {
+    "param1": "Hello",
+    "param2": "World"
+  }
+}
+
+### Create a new workspace
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+
+{
+  "name": "CreateWorkspace",
+  "arguments": {
+    "workspaceName": "my-funny-workspace"
+  }
+}
+
+### Update a node
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+
+{
+  "name": "UpdateNodeProperties",
+  "arguments": {
+    "nodeContextPath": "/sites/site/main/node-blj8xfx5l21m9@my-funny-workspace;language=en_US",
+    "updatedProperties": {
+      "text": "<p>foobar3</p>"
+    }
+  }
+}

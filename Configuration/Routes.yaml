@@ -5,3 +5,12 @@
     '@package':    'NEOSidekick.ContentRepositoryWebhooks'
     '@format':     'json'
   httpMethods: ['GET', 'POST']
+
+-
+  name:  'MCP Tools Service'
+  uriPattern: 'neosidekick/mcp/tools/{@action}'
+  defaults:
+    '@package':    'NEOSidekick.ContentRepositoryWebhooks'
+    '@controller': 'Mcp\Tools'
+    '@format':     'json'
+  httpMethods: ['GET', 'POST']
