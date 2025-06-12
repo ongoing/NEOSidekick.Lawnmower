@@ -1,3 +1,11 @@
+GET https://demo2025.ddev.site/neosidekick/mcp/tools/list
+Content-Type: application/json
+Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+
+{}
+
+
+### Ping the MCP
 POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
 Content-Type: application/json
 Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
@@ -30,9 +38,29 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
 {
   "name": "UpdateNodeProperties",
   "arguments": {
-    "nodeContextPath": "/sites/site/main/node-blj8xfx5l21m9@my-funny-workspace;language=en_US",
+    "nodeContextPath": {
+      "nodePath": "/sites/site/main/node-blj8xfx5l21m9",
+      "workspaceName": "my-funny-workspace",
+      "dimensions": {
+          "language": [
+            "en_US"
+          ]
+      }
+    },
     "updatedProperties": {
       "text": "<p>foobar3</p>"
     }
+  }
+}
+
+### Search in nodes
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+
+{
+  "name": "SearchInNodes",
+  "arguments": {
+    "term": "foobar"
   }
 }

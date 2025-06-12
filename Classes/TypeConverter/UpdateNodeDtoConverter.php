@@ -31,8 +31,10 @@ class UpdateNodeDtoConverter extends AbstractTypeConverter
         ?PropertyMappingConfigurationInterface $configuration = null
     ): UpdateNodeDto {
         ['nodeContextPath' => $nodeContextPath, 'updatedProperties' => $updatedProperties] = $source;
-        ['nodePath' => $nodePath, 'workspaceName' => $workspaceName, 'dimensions' => $dimensions] = NodePaths::explodeContextPath($nodeContextPath);
-
+        if (is_string($nodeContextPath)) {
+            $nodeContextPath = NodePaths::explodeContextPath($nodeContextPath);
+        }
+        ['nodePath' => $nodePath, 'workspaceName' => $workspaceName, 'dimensions' => $dimensions] = $nodeContextPath;
         $context = $this->createContentContext(
             $workspaceName,
             $dimensions
