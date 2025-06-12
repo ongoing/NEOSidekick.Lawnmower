@@ -141,6 +141,13 @@ class SignalCollectionService
         }
     }
 
+    /**
+     * @param NodeInterface $node
+     *
+     * @return array
+     *
+     * @deprecated moved to NEOSidekick\ContentRepositoryWebhooks\Utility\ArrayConverter
+     */
     private function renderNodeArray(NodeInterface $node): array
     {
         return [
