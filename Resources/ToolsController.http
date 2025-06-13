@@ -64,3 +64,17 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
     "term": "foo"
   }
 }
+
+### Get the sitemap
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+
+{
+  "name": "Sitemap",
+  "arguments": {
+    "dimension": {
+      "dimension": ["en"]
+    }
+  }
+}
