@@ -31,10 +31,10 @@ class SignalCollectionService
     protected array $collectedSignals = [];
 
     /**
-     * @var string
-     * @Flow\InjectConfiguration("webhookUrl")
+     * @var array
+     * @Flow\InjectConfiguration(path="endpoints")
      */
-    protected string $webhookUrl;
+    protected array $endpoints = [];
 
     /**
      * Array to store "before" and "after" states during publishing signals.
@@ -63,9 +63,9 @@ class SignalCollectionService
      */
     public function registerSignal(mixed ...$args): void
     {
-        if (!$this->webhookUrl) {
+        if (empty($this->endpoints)) {
             $this->systemLogger->warning(
-                'No webhook URL configured. Skipping signal handling.',
+                'No webhook endpoints configured. Skipping signal handling.',
                 ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
             );
             return;
@@ -73,9 +73,9 @@ class SignalCollectionService
 
         // The last array element is always the signal class + method string:
         $signalClassAndMethod = array_pop($args);
+        $eventName = $this->getEventNameFromSignal($signalClassAndMethod);
 
         switch ($signalClassAndMethod) {
-
             // ----------------------------------------------------------------
             // Neos CMS default immediate signals
             // ----------------------------------------------------------------
@@ -90,7 +90,7 @@ class SignalCollectionService
                     'event' => $signalClassAndMethod,
                     'node' => $this->renderNodeArray($node)
                 ];
-                $this->sendWebhookRequest($this->webhookUrl, [
+                $this->sendWebhookRequests($eventName, [
                     'event' => $signalClassAndMethod,
                     'node' => $this->renderNodeArray($node)
                 ]);
@@ -110,7 +110,7 @@ class SignalCollectionService
                     'node' => $this->renderNodeArray($node),
                     'propertyChange' => $this->renderNodePropertyChangeArray($node, $propertyName, $oldValue, $newValue)
                 ];
-                $this->sendWebhookRequest($this->webhookUrl, [
+                $this->sendWebhookRequests($eventName, [
                     'event' => $signalClassAndMethod,
                     'node' => $this->renderNodeArray($node),
                     'propertyChange' => $this->renderNodePropertyChangeArray($node, $propertyName, $oldValue, $newValue)
@@ -129,7 +129,7 @@ class SignalCollectionService
                     'node' => $this->renderNodeArray($node),
                     'workspace' => $this->renderWorkspaceArray($workspace)
                 ];
-                $this->sendWebhookRequest($this->webhookUrl, [
+                $this->sendWebhookRequests($eventName, [
                     'event' => $signalClassAndMethod,
                     'node' => $this->renderNodeArray($node),
                     'workspace' => $this->renderWorkspaceArray($workspace)
@@ -139,7 +139,7 @@ class SignalCollectionService
             case 'Neos\ContentRepository\Domain\Service\PublishingService::nodeDiscarded':
                 [$node, $workspace] = $args;
                 $this->systemLogger->debug(
-                    'Node discarded: ' . $node->getIdentifier()
+                    $signalClassAndMethod . ': ' . $node->getIdentifier()
                     . ' from workspace: ' . $workspace->getName(),
                     ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
                 );
@@ -148,7 +148,7 @@ class SignalCollectionService
                     'node' => $this->renderNodeArray($node),
                     'workspace' => $this->renderWorkspaceArray($workspace)
                 ];
-                $this->sendWebhookRequest($this->webhookUrl, [
+                $this->sendWebhookRequests($eventName, [
                     'event' => $signalClassAndMethod,
                     'node' => $this->renderNodeArray($node),
                     'workspace' => $this->renderWorkspaceArray($workspace)
@@ -200,6 +200,8 @@ class SignalCollectionService
             return;
         }
 
+        $eventName = 'workspacePublished';
+
         $this->systemLogger->debug('Publishing Data (before sending):', $this->nodePublishingData);
         $changes = [];
         foreach ($this->nodePublishingData as $nodeIdentifier => $states) {
@@ -232,8 +234,8 @@ class SignalCollectionService
 
         $workspacePublishedDto = new WorkspacePublishedDto('WorkspacePublished', $this->nodePublishingWorkSpaceName, $changes);
 
-        $this->sendWebhookRequest(
-            $this->webhookUrl,
+        $this->sendWebhookRequests(
+            $eventName,
             $workspacePublishedDto->toArray()
         );
 
@@ -292,13 +294,38 @@ class SignalCollectionService
         ];
     }
 
+    private function sendWebhookRequests(string $eventName, array $payload): void
+    {
+        if (empty($this->endpoints[$eventName])) {
+            return;
+        }
+        $endpointUrls = $this->endpoints[$eventName];
+
+        foreach ($endpointUrls as $endpointUrl) {
+            $this->sendWebhookRequest($endpointUrl, $payload);
+        }
+    }
+
     private function sendWebhookRequest(string $url, array $payload): void
     {
-        $client = new Client();
-        $response = $client->sendRequest(new WebhookRequest($url, $payload));
-        $this->systemLogger->debug(
-            'Webhook response: ' . $response->getStatusCode() . ' ' . $response->getBody(),
-            ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
-        );
+        try {
+            $client = new Client();
+            $client->post($url, [
+                'json' => $payload
+            ]);
+        } catch (\Exception $e) {
+            $this->systemLogger->error('Webhook request failed: ' . $e->getMessage(), [
+                'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks',
+                'exception' => $e
+            ]);
+        }
+    }
+
+    private function getEventNameFromSignal(string $signalClassAndMethod): string
+    {
+        if (str_contains($signalClassAndMethod, '::')) {
+            return substr($signalClassAndMethod, strrpos($signalClassAndMethod, '::') + 2);
+        }
+        return $signalClassAndMethod;
     }
 }

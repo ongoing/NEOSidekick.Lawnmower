@@ -1,6 +1,20 @@
 NEOSidekick:
   ContentRepositoryWebhooks:
-    webhookUrl: 'https://neosidekick.app.n8n.cloud/webhook-test/neos-before-node-publishing'
+    endpoints:
+      # nodeUpdated:
+      #  - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
+      # nodeAdded:
+      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
+      # nodeRemoved:
+      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
+      # nodePropertyChanged:
+      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
+      # nodePublished:
+      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
+      # nodeDiscarded:
+      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
+      workspacePublished:
+        - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-workspace-published'
 
 Neos:
   Flow:
