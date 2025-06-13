@@ -1,6 +1,6 @@
 GET https://demo2025.ddev.site/neosidekick/mcp/tools/list
 Content-Type: application/json
-Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
 
 {}
 
@@ -8,7 +8,7 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
 ### Ping the MCP
 POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
 Content-Type: application/json
-Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
 
 {
   "name": "Ping",
@@ -21,7 +21,7 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
 ### Create a new workspace
 POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
 Content-Type: application/json
-Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
 
 {
   "name": "CreateWorkspace",
@@ -33,7 +33,7 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
 ### Update a node
 POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
 Content-Type: application/json
-Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
 
 {
   "name": "UpdateNodeProperties",
@@ -56,7 +56,7 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
 ### Search in nodes
 POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
 Content-Type: application/json
-Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
 
 {
   "name": "SearchInNodes",

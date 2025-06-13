@@ -5,8 +5,6 @@ namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\CreateWorkspaceDto;
-use NEOSidekick\ContentRepositoryWebhooks\Tools\ToolInterface;
 
 class CreateWorkspaceTool implements ToolInterface
 {
@@ -23,7 +21,8 @@ class CreateWorkspaceTool implements ToolInterface
         ] = $arguments;
 
         if ($this->workspaceRepository->findByIdentifier($workspaceName) !== null) {
-            throw new \RuntimeException(sprintf('Workspace "%s" already exists.', $workspaceName), 1749588752286);
+            $randomSuffix = random_int(1000, 9999);
+            $workspaceName .= '-' . $randomSuffix;
         }
 
         $liveWorkspace = $this->workspaceRepository->findByIdentifier('live');

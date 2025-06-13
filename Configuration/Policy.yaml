@@ -2,10 +2,13 @@ privilegeTargets:
   'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
     'NEOSidekick.ContentRepositoryWebhooks:CanUse':
       label: 'Can use ContentRepositoryWebhooks'
-      matcher: 'within(NEOSidekick\ContentRepositoryWebhooks\Controller\NodeController) || within(NEOSidekick\ContentRepositoryWebhooks\Controller\WorkspaceController) || within(NEOSidekick\ContentRepositoryWebhooks\Controller\Mcp\ToolsController)'
+      matcher: 'within(NEOSidekick\ContentRepositoryWebhooks\Controller\Mcp\ToolsController)'
 
 roles:
-  'Neos.Flow:Everybody':
+  'NEOSidekick.ContentRepositoryWebhooks:TokenEditor':
+    superRoles: ['Neos.Neos:RestrictedEditor']
     privileges:
       - privilegeTarget: NEOSidekick.ContentRepositoryWebhooks:CanUse
+        permission: GRANT
+      - privilegeTarget: Neos.Neos:OtherWorkspacesAccess
         permission: GRANT
