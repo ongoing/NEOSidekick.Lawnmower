@@ -61,6 +61,6 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
 {
   "name": "SearchInNodes",
   "arguments": {
-    "term": "foobar"
+    "term": "foo"
   }
 }
