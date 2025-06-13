@@ -4,6 +4,12 @@
 
 TBD
 
+
+Run:
+
+    ./flow hashtoken:createhashtoken --roleNames Neos.Neos:RestrictedEditor
+
+
 ## Available Endpoints
 
 ### Node
