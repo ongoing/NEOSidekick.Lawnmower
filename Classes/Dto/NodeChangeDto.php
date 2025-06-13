@@ -4,7 +4,7 @@ namespace NEOSidekick\ContentRepositoryWebhooks\Dto;
 
 final class NodeChangeDto
 {
-    private string $identifier;
+    private array $nodeContextPath;
     private string $name;
     /** @var string created|updated|removed */
     private string $changeType;
@@ -12,20 +12,20 @@ final class NodeChangeDto
     private ?array $propertiesAfter;
 
     /**
-     * @param string $identifier
+     * @param array $nodeContextPath
      * @param string $name
      * @param string $changeType       "created", "updated", or "removed"
      * @param array|null $propertiesBefore
      * @param array|null $propertiesAfter
      */
     public function __construct(
-        string $identifier,
+        array $nodeContextPath,
         string $name,
         string $changeType,
         ?array $propertiesBefore,
         ?array $propertiesAfter
     ) {
-        $this->identifier = $identifier;
+        $this->nodeContextPath = $nodeContextPath;
         $this->name = $name;
         $this->changeType = $changeType;
         $this->propertiesBefore = $propertiesBefore;
@@ -35,7 +35,7 @@ final class NodeChangeDto
     public function toArray(): array
     {
         return [
-            'identifier' => $this->identifier,
+            'nodeContextPath' => $this->nodeContextPath,
             'name' => $this->name,
             'changeType' => $this->changeType,
             'propertiesBefore' => $this->propertiesBefore,

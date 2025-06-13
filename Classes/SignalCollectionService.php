@@ -165,10 +165,27 @@ class SignalCollectionService
                     . ' => ' . $targetWorkspace->getName(),
                     ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
                 );
-                // Store the "before" data
+                // Store the "before" data - get the original node from the target workspace
                 $this->nodePublishingWorkSpaceName = $targetWorkspace->getName();
-                $this->nodePublishingData[$node->getIdentifier()]['before'] =
-                    $this->renderNodeArray($node, includeProperties: true);
+
+                // Get the original node from the target workspace (before changes)
+                $originalNode = null;
+                try {
+                    $context = $this->createContentContext($targetWorkspace->getName(), $node->getDimensions());
+                    $originalNode = $context->getNodeByIdentifier($node->getIdentifier());
+                } catch (\Exception $e) {
+                    $this->systemLogger->warning('Could not fetch original node from target workspace: ' . $e->getMessage(), [
+                        'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                    ]);
+                }
+
+                if ($originalNode) {
+                    $this->nodePublishingData[$node->getIdentifier()]['before'] =
+                        $this->renderNodeArray($originalNode, includeProperties: true);
+                } else {
+                    // If we can't get the original node, this might be a new node being created
+                    $this->nodePublishingData[$node->getIdentifier()]['before'] = null;
+                }
                 break;
 
             case 'Neos\ContentRepository\Domain\Model\Workspace::afterNodePublishing':
@@ -178,9 +195,39 @@ class SignalCollectionService
                     . ' => ' . $workspace->getName(),
                     ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
                 );
-                // Store the "after" data
-                $this->nodePublishingData[$node->getIdentifier()]['after'] =
-                    $this->renderNodeArray($node, includeProperties: true);
+                // Store the "after" data - but only if the node actually exists in the target workspace
+                // If the node was deleted, it won't exist in the target workspace, so we don't store "after" data
+                $nodeExistsInTargetWorkspace = null;
+                try {
+                    $context = $this->createContentContext($workspace->getName(), $node->getDimensions());
+                    $nodeExistsInTargetWorkspace = $context->getNodeByIdentifier($node->getIdentifier());
+                } catch (\Exception $e) {
+                    $this->systemLogger->warning('Could not verify node existence in target workspace: ' . $e->getMessage(), [
+                        'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                    ]);
+                }
+
+                if ($nodeExistsInTargetWorkspace) {
+                    // Node exists in target workspace - it was created or updated
+                    $this->nodePublishingData[$node->getIdentifier()]['after'] =
+                        $this->renderNodeArray($nodeExistsInTargetWorkspace, includeProperties: true);
+                } else {
+                    // Node doesn't exist in target workspace yet - might be a newly created node
+                    // or a deleted node. For new nodes, use the source node data as fallback
+                    if (!isset($this->nodePublishingData[$node->getIdentifier()]['before'])) {
+                        // If there's no 'before' data, this is likely a new node
+                        $this->systemLogger->debug('Newly created node, using source node data: ' . $node->getIdentifier(), [
+                            'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                        ]);
+                        $this->nodePublishingData[$node->getIdentifier()]['after'] =
+                            $this->renderNodeArray($node, includeProperties: true);
+                    } else {
+                        // There is 'before' data but no node in target workspace - it was deleted
+                        $this->systemLogger->debug('Node was deleted: ' . $node->getIdentifier(), [
+                            'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                        ]);
+                    }
+                }
                 break;
 
             default:
@@ -208,6 +255,14 @@ class SignalCollectionService
             $before = $states['before'] ?? null;
             $after  = $states['after'] ?? null;
 
+            // Skip if both before and after are null (shouldn't happen but safety check)
+            if ($before === null && $after === null) {
+                $this->systemLogger->warning('Skipping node with no before/after data: ' . $nodeIdentifier, [
+                    'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                ]);
+                continue;
+            }
+
             // If there's no "before" => created
             // If there's no "after" => removed
             // Otherwise => updated
@@ -219,15 +274,20 @@ class SignalCollectionService
                 $changeType = 'updated';
             }
 
-            // "identifier" and "name" come from the AFTER node if possible; Fallback to BEFORE if node was removed
-            $identifier = $after['identifier'] ?? $before['identifier'] ?? 'unknown';
-            $name       = $after['name']       ?? $before['name']       ?? 'unknown';
+            // Create nodeContextPath object from the AFTER node if possible; Fallback to BEFORE if node was removed
+            $nodeContextPath = [
+                'identifier' => $after['identifier'] ?? $before['identifier'] ?? $nodeIdentifier,
+                'path' => $after['path'] ?? $before['path'] ?? 'unknown',
+                'workspace' => $after['workspace'] ?? $before['workspace'] ?? $this->nodePublishingWorkSpaceName ?? 'unknown',
+                'dimensions' => $after['dimensions'] ?? $before['dimensions'] ?? []
+            ];
+            $name = $after['name'] ?? $before['name'] ?? 'unknown';
 
             // propertiesBefore/propertiesAfter can be null
             $propertiesBefore = $before['properties'] ?? null;
-            $propertiesAfter  = $after['properties']  ?? null;
+            $propertiesAfter  = $changeType === 'removed' ? null : ($after['properties'] ?? null);
 
-            $nodeChange = new NodeChangeDto($identifier, $name, $changeType, $propertiesBefore, $propertiesAfter);
+            $nodeChange = new NodeChangeDto($nodeContextPath, $name, $changeType, $propertiesBefore, $propertiesAfter);
 
             $changes[] = $nodeChange->toArray();
         }
