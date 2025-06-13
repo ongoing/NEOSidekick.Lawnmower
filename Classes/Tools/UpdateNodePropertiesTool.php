@@ -36,8 +36,23 @@ class UpdateNodePropertiesTool implements ToolInterface
                 'type' => 'object',
                 'properties' => [
                     'nodeContextPath' => [
-                        'type' => 'string',
-                        'description' => 'The identifier of the node to update'
+                        'type' => 'object',
+                        'description' => 'The identifier of the node to update',
+                        'properties' => [
+                            'nodePath' => [
+                                'type' => 'string',
+                                'description' => 'The path of the node in the content repository'
+                            ],
+                            'workspaceName' => [
+                                'type' => 'string',
+                                'description' => 'The name of the workspace where the node resides'
+                            ],
+                            'dimensions' => [
+                                'type' => 'object',
+                                'description' => 'The dimensions of the node, e.g., language, country, etc.'
+                            ]
+                        ],
+                        'required' => ['nodePath', 'workspaceName', 'dimensions']
                     ],
                     'properties' => [
                         'type' => 'object',
