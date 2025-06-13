@@ -1,3 +1,5 @@
+# WIP This is currently just a playground for ideas
+
 # content-repository-webhooks
 
 ## Authentication 
