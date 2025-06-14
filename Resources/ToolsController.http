@@ -30,6 +30,30 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
   }
 }
 
+### Publish and delete a workspace
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+
+{
+  "name": "PublishAndDeleteWorkspace",
+  "arguments": {
+    "workspaceName": "my-funny-workspace"
+  }
+}
+
+### Discard and delete a workspace
+POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+Content-Type: application/json
+Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+
+{
+  "name": "DiscardAndDeleteWorkspace",
+  "arguments": {
+    "workspaceName": "my-funny-workspace"
+  }
+}
+
 ### Update a node
 POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
 Content-Type: application/json

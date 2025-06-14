@@ -10,5 +10,7 @@ roles:
     privileges:
       - privilegeTarget: NEOSidekick.ContentRepositoryWebhooks:CanUse
         permission: GRANT
+      - privilegeTarget: Neos.Neos:Backend.PublishToLiveWorkspace
+        permission: GRANT
       - privilegeTarget: Neos.Neos:OtherWorkspacesAccess
         permission: GRANT
