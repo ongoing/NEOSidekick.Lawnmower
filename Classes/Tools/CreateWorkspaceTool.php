@@ -5,6 +5,7 @@ namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
+use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
 
 class CreateWorkspaceTool implements ToolInterface
 {
@@ -39,7 +40,7 @@ class CreateWorkspaceTool implements ToolInterface
     public static function getDefinition(): array
     {
         return [
-            'name' => self::class,
+            'name' => Tools::convertClassNameToToolName(self::class),
             'description' => 'A tool to create a new workspace in the content repository',
             'inputSchema' => [
                 'type' => 'object',

@@ -7,6 +7,7 @@ use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\ContentRepository\Domain\Service\NodeTypeManager;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\ObjectManagement\ObjectManagerInterface;
+use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
 
 
 class SitemapTool implements ToolInterface
@@ -94,7 +95,7 @@ class SitemapTool implements ToolInterface
     public static function getDefinition(): array
     {
         return [
-            'name' => self::class,
+            'name' => Tools::convertClassNameToToolName(self::class),
             'description' => 'A tool to generate a sitemap of the content repository as a markdown file tree.',
             'inputSchema' => [
                 'type' => 'object',

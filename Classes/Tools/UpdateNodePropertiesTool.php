@@ -7,6 +7,7 @@ use Neos\Flow\Property\TypeConverter\ObjectConverter;
 use Neos\Neos\TypeConverter\NodeConverter;
 use NEOSidekick\ContentRepositoryWebhooks\Dto\UpdateNodeDto;
 use NEOSidekick\ContentRepositoryWebhooks\TypeConverter\UpdateNodeDtoConverter;
+use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
 
 class UpdateNodePropertiesTool implements ToolInterface
 {
@@ -30,7 +31,7 @@ class UpdateNodePropertiesTool implements ToolInterface
     public static function getDefinition(): array
     {
         return [
-            'name' => self::class,
+            'name' => Tools::convertClassNameToToolName(self::class),
             'description' => 'A tool to update properties of a node in the content repository',
             'inputSchema' => [
                 'type' => 'object',

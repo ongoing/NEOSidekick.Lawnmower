@@ -6,6 +6,7 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Controller\CreateContentContextTrait;
 use Neos\Neos\Domain\Service\NodeSearchService;
 use NEOSidekick\ContentRepositoryWebhooks\Utility\ArrayConverter;
+use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
 
 class SearchInNodesTool implements ToolInterface
 {
@@ -38,7 +39,7 @@ class SearchInNodesTool implements ToolInterface
     public static function getDefinition(): array
     {
         return [
-            'name' => self::class,
+            'name' => Tools::convertClassNameToToolName(self::class),
             'description' => 'A tool to search for nodes in the content repository',
             'inputSchema' => [
                 'type' => 'object',

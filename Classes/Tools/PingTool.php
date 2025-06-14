@@ -2,6 +2,8 @@
 
 namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
 
+use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
+
 class PingTool implements ToolInterface
 {
 
@@ -23,7 +25,7 @@ class PingTool implements ToolInterface
         //  }
         //}
         return [
-            'name' => self::class,
+            'name' => Tools::convertClassNameToToolName(self::class),
             'description' => 'A tool that does something interesting',
             'inputSchema' => [
                 'type' => 'object',
