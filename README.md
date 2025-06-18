@@ -1,8 +1,12 @@
 # NEOSidekick Lawnmower: your versatile toolchain for connecting AI Agents to Neos CMS
 
+**THIS PACKAGE IS A DEMO AND NOT (YET) READY FOR PRODUCTION-USE**
+
 For our talk at the Neos Conference 2025, we came up with this package to experiment with connecting AI Agents to Neos CMS.
 It helps, on the one hand to send webhooks for content changes in Neos CMS to AI Agents, 
 and on the other hand to provide endpoints for AI Agents to interact with Neos CMS.
+
+[More information](https://neosidekick.com/ai-agents-talk)
 
 ## Installation
 
