@@ -2,7 +2,7 @@ privilegeTargets:
   'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
     'NEOSidekick.Lawnmower:CanUse':
       label: 'Can use ContentRepositoryWebhooks'
-      matcher: 'within(NEOSidekick\Lawnmower\Controller\Mcp\ToolsController)'
+      matcher: 'within(NEOSidekick\Lawnmower\Controller\ToolsController)'
 
 roles:
   'NEOSidekick.Lawnmower:TokenEditor':

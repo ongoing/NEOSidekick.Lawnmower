@@ -1,14 +1,15 @@
-GET https://demo2025.ddev.site/neosidekick/mcp/tools/list
+### List all available tools
+GET https://yoursite.com/neosidekick/lawnmower/tools/list
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {}
 
 
-### Ping the MCP
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+### Ping
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {
   "name": "Ping",
@@ -19,9 +20,9 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
 }
 
 ### Create a new workspace
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {
   "name": "CreateWorkspace",
@@ -31,9 +32,9 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
 }
 
 ### Publish and delete a workspace
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {
   "name": "PublishAndDeleteWorkspace",
@@ -43,9 +44,9 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
 }
 
 ### Discard and delete a workspace
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {
   "name": "DiscardAndDeleteWorkspace",
@@ -54,10 +55,10 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
   }
 }
 
-### Update a node
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+### Update node properties
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {
   "name": "UpdateNodeProperties",
@@ -78,19 +79,19 @@ Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxK
 }
 
 ### Search in nodes
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
-Authorization: Bearer Q2PaWvATnGhc10xb5xRlBINJjYJGBknrXla8zT0w8iVmxfAiMfSgrGovxKidbCiF
+Authorization: Bearer here-comes-your-bearer-token
 
 {
   "name": "SearchInNodes",
   "arguments": {
-    "term": "foo"
+    "term": "John Doe"
   }
 }
 
 ### Get the sitemap
-POST https://demo2025.ddev.site/neosidekick/mcp/tools/call
+POST https://yoursite.com/neosidekick/lawnmower/tools/call
 Content-Type: application/json
 Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
 
@@ -98,7 +99,7 @@ Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYn
   "name": "Sitemap",
   "arguments": {
     "dimension": {
-      "dimension": ["en"]
+      "language": ["en"]
     }
   }
 }
