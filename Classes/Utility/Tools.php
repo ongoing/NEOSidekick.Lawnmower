@@ -1,6 +1,6 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Utility;
+namespace NEOSidekick\Lawnmower\Utility;
 
 class Tools
 {

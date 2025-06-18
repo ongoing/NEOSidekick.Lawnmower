@@ -1,13 +1,13 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
+namespace NEOSidekick\Lawnmower\Tools;
 
 use Neos\Flow\Property\PropertyMappingConfiguration;
 use Neos\Flow\Property\TypeConverter\ObjectConverter;
 use Neos\Neos\TypeConverter\NodeConverter;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\UpdateNodeDto;
-use NEOSidekick\ContentRepositoryWebhooks\TypeConverter\UpdateNodeDtoConverter;
-use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
+use NEOSidekick\Lawnmower\Dto\UpdateNodeDto;
+use NEOSidekick\Lawnmower\TypeConverter\UpdateNodeDtoConverter;
+use NEOSidekick\Lawnmower\Utility\Tools;
 
 class UpdateNodePropertiesTool implements ToolInterface
 {

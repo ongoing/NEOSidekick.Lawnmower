@@ -1,11 +1,11 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Controller;
+namespace NEOSidekick\Lawnmower\Controller;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Flow\Mvc\View\JsonView;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\UpdateNodeDto;
+use NEOSidekick\Lawnmower\Dto\UpdateNodeDto;
 
 class NodeController extends ActionController
 {

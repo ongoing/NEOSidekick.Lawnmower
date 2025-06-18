@@ -1,6 +1,6 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Dto;
+namespace NEOSidekick\Lawnmower\Dto;
 
 use Neos\ContentRepository\Domain\Model\Workspace;
 

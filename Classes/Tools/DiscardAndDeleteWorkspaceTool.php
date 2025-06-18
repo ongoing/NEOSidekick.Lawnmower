@@ -1,12 +1,12 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
+namespace NEOSidekick\Lawnmower\Tools;
 
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Service\PublishingService;
 use Neos\Neos\Ui\ContentRepository\Service\WorkspaceService;
-use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
+use NEOSidekick\Lawnmower\Utility\Tools;
 
 class DiscardAndDeleteWorkspaceTool implements ToolInterface
 {

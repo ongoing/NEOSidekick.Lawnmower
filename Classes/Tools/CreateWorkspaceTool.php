@@ -1,11 +1,11 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
+namespace NEOSidekick\Lawnmower\Tools;
 
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
-use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
+use NEOSidekick\Lawnmower\Utility\Tools;
 
 class CreateWorkspaceTool implements ToolInterface
 {

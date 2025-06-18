@@ -1,13 +1,13 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
+namespace NEOSidekick\Lawnmower\Tools;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\ContentRepository\Domain\Service\NodeTypeManager;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\ObjectManagement\ObjectManagerInterface;
-use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
+use NEOSidekick\Lawnmower\Utility\Tools;
 
 
 class SitemapTool implements ToolInterface

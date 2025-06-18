@@ -1,6 +1,6 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks;
+namespace NEOSidekick\Lawnmower;
 
 use GuzzleHttp\Client;
 use Neos\ContentRepository\Domain\Model\Node;
@@ -8,8 +8,8 @@ use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Controller\CreateContentContextTrait;
 use Psr\Log\LoggerInterface;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\NodeChangeDto;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\WorkspacePublishedDto;
+use NEOSidekick\Lawnmower\Dto\NodeChangeDto;
+use NEOSidekick\Lawnmower\Dto\WorkspacePublishedDto;
 
 /**
  * @Flow\Scope("singleton")
@@ -66,7 +66,7 @@ class SignalCollectionService
         if (empty($this->endpoints)) {
             $this->systemLogger->warning(
                 'No webhook endpoints configured. Skipping signal handling.',
-                ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
+                ['packageKey' => 'NEOSidekick.Lawnmower']
             );
             return;
         }
@@ -84,7 +84,7 @@ class SignalCollectionService
             case 'Neos\ContentRepository\Domain\Model\Node::nodeRemoved':
                 $node = $args[0];
                 $this->systemLogger->debug($signalClassAndMethod . ': ' . $node->getIdentifier(), [
-                    'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                    'packageKey' => 'NEOSidekick.Lawnmower'
                 ]);
                 $this->collectedSignals[] = [
                     'event' => $signalClassAndMethod,
@@ -103,7 +103,7 @@ class SignalCollectionService
                     . ' Property: ' . $propertyName
                     . ' Old Value: ' . $oldValue
                     . ' New Value: ' . $newValue,
-                    ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
+                    ['packageKey' => 'NEOSidekick.Lawnmower']
                 );
                 $this->collectedSignals[] = [
                     'event' => $signalClassAndMethod,
@@ -122,7 +122,7 @@ class SignalCollectionService
                 $this->systemLogger->debug(
                     'Node published: ' . $node->getIdentifier()
                     . ' to workspace: ' . $workspace->getName(),
-                    ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
+                    ['packageKey' => 'NEOSidekick.Lawnmower']
                 );
                 $this->collectedSignals[] = [
                     'event' => $signalClassAndMethod,
@@ -141,7 +141,7 @@ class SignalCollectionService
                 $this->systemLogger->debug(
                     $signalClassAndMethod . ': ' . $node->getIdentifier()
                     . ' from workspace: ' . $workspace->getName(),
-                    ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
+                    ['packageKey' => 'NEOSidekick.Lawnmower']
                 );
                 $this->collectedSignals[] = [
                     'event' => $signalClassAndMethod,
@@ -163,7 +163,7 @@ class SignalCollectionService
                 $this->systemLogger->debug(
                     'beforeNodePublishing: ' . $node->getIdentifier()
                     . ' => ' . $targetWorkspace->getName(),
-                    ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
+                    ['packageKey' => 'NEOSidekick.Lawnmower']
                 );
                 // Store the "before" data - get the original node from the target workspace
                 $this->nodePublishingWorkSpaceName = $targetWorkspace->getName();
@@ -175,7 +175,7 @@ class SignalCollectionService
                     $originalNode = $context->getNodeByIdentifier($node->getIdentifier());
                 } catch (\Exception $e) {
                     $this->systemLogger->warning('Could not fetch original node from target workspace: ' . $e->getMessage(), [
-                        'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                        'packageKey' => 'NEOSidekick.Lawnmower'
                     ]);
                 }
 
@@ -193,7 +193,7 @@ class SignalCollectionService
                 $this->systemLogger->debug(
                     'afterNodePublishing: ' . $node->getIdentifier()
                     . ' => ' . $workspace->getName(),
-                    ['packageKey' => 'NEOSidekick.ContentRepositoryWebhooks']
+                    ['packageKey' => 'NEOSidekick.Lawnmower']
                 );
                 // Store the "after" data - but only if the node actually exists in the target workspace
                 // If the node was deleted, it won't exist in the target workspace, so we don't store "after" data
@@ -203,7 +203,7 @@ class SignalCollectionService
                     $nodeExistsInTargetWorkspace = $context->getNodeByIdentifier($node->getIdentifier());
                 } catch (\Exception $e) {
                     $this->systemLogger->warning('Could not verify node existence in target workspace: ' . $e->getMessage(), [
-                        'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                        'packageKey' => 'NEOSidekick.Lawnmower'
                     ]);
                 }
 
@@ -217,14 +217,14 @@ class SignalCollectionService
                     if (!isset($this->nodePublishingData[$node->getIdentifier()]['before'])) {
                         // If there's no 'before' data, this is likely a new node
                         $this->systemLogger->debug('Newly created node, using source node data: ' . $node->getIdentifier(), [
-                            'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                            'packageKey' => 'NEOSidekick.Lawnmower'
                         ]);
                         $this->nodePublishingData[$node->getIdentifier()]['after'] =
                             $this->renderNodeArray($node, includeProperties: true);
                     } else {
                         // There is 'before' data but no node in target workspace - it was deleted
                         $this->systemLogger->debug('Node was deleted: ' . $node->getIdentifier(), [
-                            'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                            'packageKey' => 'NEOSidekick.Lawnmower'
                         ]);
                     }
                 }
@@ -258,7 +258,7 @@ class SignalCollectionService
             // Skip if both before and after are null (shouldn't happen but safety check)
             if ($before === null && $after === null) {
                 $this->systemLogger->warning('Skipping node with no before/after data: ' . $nodeIdentifier, [
-                    'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks'
+                    'packageKey' => 'NEOSidekick.Lawnmower'
                 ]);
                 continue;
             }
@@ -309,7 +309,7 @@ class SignalCollectionService
      *
      * @return array
      *
-     * @deprecated moved to NEOSidekick\ContentRepositoryWebhooks\Utility\ArrayConverter
+     * @deprecated moved to NEOSidekick\Lawnmower\Utility\ArrayConverter
      */
     private function renderNodeArray(
         Node $node,
@@ -375,7 +375,7 @@ class SignalCollectionService
             ]);
         } catch (\Exception $e) {
             $this->systemLogger->error('Webhook request failed: ' . $e->getMessage(), [
-                'packageKey' => 'NEOSidekick.ContentRepositoryWebhooks',
+                'packageKey' => 'NEOSidekick.Lawnmower',
                 'exception' => $e
             ]);
         }

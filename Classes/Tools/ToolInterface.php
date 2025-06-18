@@ -1,6 +1,6 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
+namespace NEOSidekick\Lawnmower\Tools;
 
 interface ToolInterface
 {

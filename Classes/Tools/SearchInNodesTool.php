@@ -1,12 +1,12 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Tools;
+namespace NEOSidekick\Lawnmower\Tools;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Controller\CreateContentContextTrait;
 use Neos\Neos\Domain\Service\NodeSearchService;
-use NEOSidekick\ContentRepositoryWebhooks\Utility\ArrayConverter;
-use NEOSidekick\ContentRepositoryWebhooks\Utility\Tools;
+use NEOSidekick\Lawnmower\Utility\ArrayConverter;
+use NEOSidekick\Lawnmower\Utility\Tools;
 
 class SearchInNodesTool implements ToolInterface
 {

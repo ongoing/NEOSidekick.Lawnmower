@@ -1,13 +1,13 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Controller;
+namespace NEOSidekick\Lawnmower\Controller;
 
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Flow\Mvc\View\JsonView;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\CreateWorkspaceDto;
+use NEOSidekick\Lawnmower\Dto\CreateWorkspaceDto;
 
 class WorkspaceController extends ActionController
 {

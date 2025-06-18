@@ -1,14 +1,14 @@
 privilegeTargets:
   'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
-    'NEOSidekick.ContentRepositoryWebhooks:CanUse':
+    'NEOSidekick.Lawnmower:CanUse':
       label: 'Can use ContentRepositoryWebhooks'
-      matcher: 'within(NEOSidekick\ContentRepositoryWebhooks\Controller\Mcp\ToolsController)'
+      matcher: 'within(NEOSidekick\Lawnmower\Controller\Mcp\ToolsController)'
 
 roles:
-  'NEOSidekick.ContentRepositoryWebhooks:TokenEditor':
+  'NEOSidekick.Lawnmower:TokenEditor':
     superRoles: ['Neos.Neos:RestrictedEditor']
     privileges:
-      - privilegeTarget: NEOSidekick.ContentRepositoryWebhooks:CanUse
+      - privilegeTarget: NEOSidekick.Lawnmower:CanUse
         permission: GRANT
       - privilegeTarget: Neos.Neos:Backend.PublishToLiveWorkspace
         permission: GRANT

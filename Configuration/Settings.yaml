@@ -1,33 +1,20 @@
 NEOSidekick:
-  ContentRepositoryWebhooks:
-    endpoints:
-      # nodeUpdated:
-      #  - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
-      # nodeAdded:
-      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
-      # nodeRemoved:
-      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
-      # nodePropertyChanged:
-      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
-      # nodePublished:
-      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
-      # nodeDiscarded:
-      #   - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-content-change'
-      workspacePublished:
-        - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-workspace-published'
-
+    Lawnmower:
+        endpoints:
+            workspacePublished:
+                - 'https://neosidekick.app.n8n.cloud/webhook-test/neos-workspace-published'
 Neos:
-  Flow:
-    mvc:
-      routes:
-        'NEOSidekick.ContentRepositoryWebhooks': true
-    security:
-      authentication:
-        providers:
-          'NEOSidekick.ContentRepositoryWebhooks:Token':
-            provider: Flownative\TokenAuthentication\Security\HashTokenProvider
-            requestPatterns:
-              'NEOSidekick.ContentRepositoryWebhooks:BackendControllers':
-                pattern: ControllerObjectName
-                patternOptions:
-                  controllerObjectNamePattern: 'NEOSidekick\ContentRepositoryWebhooks\Controller\.*'
+    Flow:
+        mvc:
+            routes:
+                NEOSidekick.Lawnmower: true
+        security:
+            authentication:
+                providers:
+                    'NEOSidekick.Lawnmower:Token':
+                        provider: Flownative\TokenAuthentication\Security\HashTokenProvider
+                        requestPatterns:
+                            'NEOSidekick.Lawnmower:BackendControllers':
+                                pattern: ControllerObjectName
+                                patternOptions:
+                                    controllerObjectNamePattern: 'NEOSidekick\Lawnmower\Controller\.*'

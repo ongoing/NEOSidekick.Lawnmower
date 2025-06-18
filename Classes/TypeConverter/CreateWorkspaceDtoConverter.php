@@ -1,13 +1,13 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\TypeConverter;
+namespace NEOSidekick\Lawnmower\TypeConverter;
 
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Property\Exception\TypeConverterException;
 use Neos\Flow\Property\PropertyMappingConfigurationInterface;
 use Neos\Flow\Property\TypeConverter\AbstractTypeConverter;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\CreateWorkspaceDto;
+use NEOSidekick\Lawnmower\Dto\CreateWorkspaceDto;
 
 class CreateWorkspaceDtoConverter extends AbstractTypeConverter
 {

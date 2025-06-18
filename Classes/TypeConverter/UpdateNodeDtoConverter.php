@@ -1,13 +1,13 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\TypeConverter;
+namespace NEOSidekick\Lawnmower\TypeConverter;
 
 use Neos\ContentRepository\Domain\Utility\NodePaths;
 use Neos\Flow\Property\Exception\TypeConverterException;
 use Neos\Flow\Property\PropertyMappingConfigurationInterface;
 use Neos\Flow\Property\TypeConverter\AbstractTypeConverter;
 use Neos\Neos\Controller\CreateContentContextTrait;
-use NEOSidekick\ContentRepositoryWebhooks\Dto\UpdateNodeDto;
+use NEOSidekick\Lawnmower\Dto\UpdateNodeDto;
 
 class UpdateNodeDtoConverter extends AbstractTypeConverter
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks\Controller\Mcp;
+namespace NEOSidekick\Lawnmower\Controller\Mcp;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Flow\Mvc\View\JsonView;
-use NEOSidekick\ContentRepositoryWebhooks\Tools\ToolInterface;
+use NEOSidekick\Lawnmower\Tools\ToolInterface;
 
 class ToolsController extends ActionController
 {

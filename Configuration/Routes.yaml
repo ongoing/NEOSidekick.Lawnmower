@@ -2,7 +2,7 @@
   name:  'Backend Service'
   uriPattern: 'neosidekick/n8n/{@controller}/{@action}'
   defaults:
-    '@package':    'NEOSidekick.ContentRepositoryWebhooks'
+    '@package':    'NEOSidekick.Lawnmower'
     '@format':     'json'
   httpMethods: ['GET', 'POST']
 
@@ -10,7 +10,7 @@
   name:  'MCP Tools Service'
   uriPattern: 'neosidekick/mcp/tools/{@action}'
   defaults:
-    '@package':    'NEOSidekick.ContentRepositoryWebhooks'
+    '@package':    'NEOSidekick.Lawnmower'
     '@controller': 'Mcp\Tools'
     '@format':     'json'
   httpMethods: ['GET', 'POST']

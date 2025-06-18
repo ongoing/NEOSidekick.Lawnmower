@@ -1,7 +1,7 @@
 {
     "description": "",
     "type": "neos-package",
-    "name": "neosidekick/contentrepositorywebhooks",
+    "name": "neosidekick/lawnmower",
     "require": {
         "neos/neos": "*",
         "neos/content-repository": "*",
@@ -9,12 +9,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NEOSidekick\\ContentRepositoryWebhooks\\": "Classes/"
+            "NEOSidekick\\Lawnmower\\": "Classes/"
         }
     },
     "extra": {
         "neos": {
-            "package-key": "NEOSidekick.ContentRepositoryWebhooks"
+            "package-key": "NEOSidekick.Lawnmower"
         }
     }
 }

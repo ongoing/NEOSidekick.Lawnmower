@@ -1,6 +1,6 @@
 <?php
 
-namespace NEOSidekick\ContentRepositoryWebhooks;
+namespace NEOSidekick\Lawnmower;
 
 use GuzzleHttp\Psr7\Request;
 
