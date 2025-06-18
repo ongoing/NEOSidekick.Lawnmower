@@ -64,7 +64,6 @@ Authorization: Bearer here-comes-your-bearer-token
 #### Get Sitemap
 
 ```http request
-### Get the sitemap
 POST /neosidekick/lawnmower/tools/call
 Content-Type: application/json
 Authorization: Bearer 4FGl4St6UIK6lsFi3iliZrB6dv8Sbk47IitEuusUs1PV9snss0MkAKOiYnVNGt1y
