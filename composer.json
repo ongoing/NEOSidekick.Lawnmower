@@ -1,10 +1,11 @@
 {
-    "description": "",
+    "description": "Your versatile toolchain for connecting AI Agents to Neos CMS",
     "type": "neos-package",
     "name": "neosidekick/lawnmower",
+    "license": "GPL-3.0-or-later",
     "require": {
-        "neos/neos": "*",
-        "neos/content-repository": "*",
+        "neos/neos": "^7.3 || ^8.0",
+        "neos/content-repository": "^7.3 || ^8.0",
         "flownative/token-authentication": "^2.0"
     },
     "autoload": {

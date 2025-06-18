@@ -10,7 +10,6 @@ and on the other hand to provide endpoints for AI Agents to interact with Neos C
 composer require neosidekick/lawnmower
 ```
 
-
 ## Content Repository Webhooks
 
 ### Authentication 
