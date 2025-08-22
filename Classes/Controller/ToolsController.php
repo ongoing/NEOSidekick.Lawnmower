@@ -1,10 +1,11 @@
 <?php
 
-namespace NEOSidekick\Lawnmower\Controller\Mcp;
+namespace NEOSidekick\Lawnmower\Controller;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Flow\Mvc\View\JsonView;
+use Neos\Flow\Reflection\ReflectionService;
 use NEOSidekick\Lawnmower\Tools\ToolInterface;
 
 class ToolsController extends ActionController
@@ -12,6 +13,12 @@ class ToolsController extends ActionController
     protected $defaultViewObjectName = JsonView::class;
 
     protected $supportedMediaTypes = ['application/json'];
+
+    /**
+     * @Flow\Inject
+     * @var ReflectionService
+     */
+    protected $reflectionService;
 
     public function listAction(): void
     {

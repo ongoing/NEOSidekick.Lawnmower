@@ -181,7 +181,7 @@ class SignalCollectionService
 
                 if ($originalNode) {
                     $this->nodePublishingData[$node->getIdentifier()]['before'] =
-                        $this->renderNodeArray($originalNode, includeProperties: true);
+                        $this->renderNodeArray($originalNode, true);
                 } else {
                     // If we can't get the original node, this might be a new node being created
                     $this->nodePublishingData[$node->getIdentifier()]['before'] = null;
@@ -210,7 +210,7 @@ class SignalCollectionService
                 if ($nodeExistsInTargetWorkspace) {
                     // Node exists in target workspace - it was created or updated
                     $this->nodePublishingData[$node->getIdentifier()]['after'] =
-                        $this->renderNodeArray($nodeExistsInTargetWorkspace, includeProperties: true);
+                        $this->renderNodeArray($nodeExistsInTargetWorkspace, true);
                 } else {
                     // Node doesn't exist in target workspace yet - might be a newly created node
                     // or a deleted node. For new nodes, use the source node data as fallback
@@ -220,7 +220,7 @@ class SignalCollectionService
                             'packageKey' => 'NEOSidekick.Lawnmower'
                         ]);
                         $this->nodePublishingData[$node->getIdentifier()]['after'] =
-                            $this->renderNodeArray($node, includeProperties: true);
+                            $this->renderNodeArray($node, true);
                     } else {
                         // There is 'before' data but no node in target workspace - it was deleted
                         $this->systemLogger->debug('Node was deleted: ' . $node->getIdentifier(), [

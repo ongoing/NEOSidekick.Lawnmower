@@ -4,8 +4,8 @@
     "name": "neosidekick/lawnmower",
     "license": "GPL-3.0-or-later",
     "require": {
-        "neos/neos": "^7.3 || ^8.0",
-        "neos/content-repository": "^7.3 || ^8.0",
+        "neos/neos": "^5.3 || ^7.3 || ^8.0",
+        "neos/content-repository": "^5.3 || ^7.3 || ^8.0",
         "flownative/token-authentication": "^2.0"
     },
     "autoload": {
